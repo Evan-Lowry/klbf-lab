@@ -43,3 +43,9 @@ Notes:
 - `VICTORY_KEYS` makes the keyboard stand-in pad the signed-in user's pad: a real pad then only reaches the pause button. Leave it unset to play with a pad.
 - Alt+Enter (fullscreen) freezes the picture in the world: stay windowed.
 - `VICTORY_D3D12_DRED=1` made runs clearly more stable on this card.
+
+### Texture size cap
+
+`VICTORY_TEXTURE_MAX_DIM` optionally limits the largest side of eligible sampled, block-compressed placed textures by using a smaller existing mip level. Set it to a size from 4 to 16384; unset or `0` disables it. Textures can look softer. With the diagnostics feature, `VICTORY_VRAM_TEXTURE_CENSUS=1` adds a texture allocation census to the memory log.
+
+On an RX 6800 system with 16 GB RAM, in the same gameplay scene with the camera moving, a 512 cap used 18.2–18.5 GB of private memory and 7.1 GB of local VRAM, versus 22.4–22.5 GB and 11.3–11.4 GB without the cap (3,900 textures capped). A 1024 cap used 20.4 GB private memory and 9.4 GB local VRAM (753 textures capped). Textures looked softer; observed materials remained correct. Frame times were noisy, with no consistent regression.
